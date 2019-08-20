@@ -1,0 +1,8 @@
+[package]
+name = "changers"
+version = "0.1.0"
+authors = ["Alexander Sawtschuk <a.sawtschuk@getflip.de>"]
+edition = "2018"
+
+[dependencies]
+structopt = { version = "0.2" }
