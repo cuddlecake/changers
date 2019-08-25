@@ -5,7 +5,7 @@ use structopt::StructOpt;
     name = "changers",
     about = "Utility for creating and aggregating Changelog Artifacts"
 )]
-struct Git {
+struct Changers {
     #[structopt(subcommand)]
     cmd: Command,
 }
@@ -74,6 +74,6 @@ struct CreateVal {
 }
 
 fn main() {
-    let opt = Git::from_args();
+    let opt = Changers::from_args();
     println!("{:?}", opt);
 }
