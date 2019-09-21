@@ -27,6 +27,14 @@ pub enum Command {
         /// The summary of the logged change
         summary: String,
     },
-    #[structopt(name = "fetch")]
-    Aggregate,
+    #[structopt(name = "aggregate")]
+    Aggregate {
+        /// The release to aggregate
+        release_name: String,
+    },
+    #[structopt(name = "release")]
+    Release {
+        /// Name of the Release and the resulting directory
+        release_name: String,
+    },
 }
