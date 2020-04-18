@@ -1,7 +1,7 @@
 [package]
 name = "changers"
 version = "0.1.0"
-authors = ["Alexander Sawtschuk <a.sawtschuk@getflip.de>"]
+authors = ["Alexander Sawtschuk <sawtschuk.alex@gmail.com>"]
 edition = "2018"
 
 [dependencies]
