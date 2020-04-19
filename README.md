@@ -1,7 +1,5 @@
 # changers
 
-A command-line tool for creating, releasing and rendering changelog artifacts
-
 ## Usage
 
 #### Create artifacts
