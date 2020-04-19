@@ -1,6 +1,6 @@
 # changers
 
-A command-line tool for creating, aggregating and publishing changelog artifacts
+A command-line tool for creating, releasing and rendering changelog artifacts
 
 ## Usage
 
