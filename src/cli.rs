@@ -12,7 +12,7 @@ pub fn start() -> CLI {
 #[derive(Debug, StructOpt)]
 #[structopt(
     name = "changers",
-    about = "Utility for creating and aggregating Changelog Artifacts"
+    about = "Utility for creating and rendering Changelog Artifacts"
 )]
 
 pub struct CLI {
@@ -32,10 +32,13 @@ pub enum Command {
         #[structopt(default_value = "user", long = "for", short = "f")]
         audience: String,
     },
-    #[structopt(name = "aggregate")]
-    Aggregate {
-        /// The release to aggregate
-        release_name: String,
+    #[structopt(name = "render")]
+    Render {
+        /// The release to render
+        release_name: Version,
+
+        /// Audience for which to render exclusively
+        only: String,
     },
     #[structopt(name = "release")]
     Release {

@@ -1,4 +1,4 @@
-use crate::change::{create, release, repo};
+use crate::change::{create, release, render, repo};
 use cli::Command;
 use std::path::Path;
 
@@ -24,8 +24,8 @@ fn main() {
             Command::Release { release_name } => {
                 release::handle(release::Args::new(release_name), repo).unwrap();
             }
-            Command::Aggregate { release_name: _ } => {
-                println!("release!");
+            Command::Render { release_name, only } => {
+                render::handle(render::Args::new(release_name, only), repo).unwrap();
             }
         },
         Err(err) => println!("Failed Collecting Git Repository Information: {:?}", err),
