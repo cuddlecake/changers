@@ -53,7 +53,6 @@ impl ToString for LogType {
 #[cfg(test)]
 mod tests {
     use crate::cli::log_type::LogType;
-    use git2::StashApplyProgress::LoadingStash;
     use std::str::FromStr;
 
     #[test]

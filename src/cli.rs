@@ -28,7 +28,8 @@ pub enum Command {
         log_type: LogType,
         /// The summary of the logged change
         summary: String,
-        /// The target audience for this change
+
+        /// Audience for which to render exclusively
         #[structopt(default_value = "user", long = "for", short = "f")]
         audience: String,
     },
@@ -38,7 +39,8 @@ pub enum Command {
         release_name: Version,
 
         /// Audience for which to render exclusively
-        only: String,
+        #[structopt(default_value = "user", long = "for", short = "f")]
+        audience: String,
     },
     #[structopt(name = "release")]
     Release {
