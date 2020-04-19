@@ -7,7 +7,7 @@ A command-line tool for creating, aggregating and publishing changelog artifacts
 #### Create artifacts
 
 ```sh
-changers create bugfix "Fixed some Error that caused issues"
+changers create bugfix "Fixed some Error that caused issues" --for=user
 ```
 
 This will create a changelog artifact of type `bugfix` in the directory `./changelog/unreleased` as a single file.
@@ -15,7 +15,7 @@ This will create a changelog artifact of type `bugfix` in the directory `./chang
 #### Release a Changelog
 
 ```sh
-changers release "v0.1.0"
+changers release 0.1.0
 ```
 
 This will rename the current `unreleased` subdirectory into `v0.1.0`
@@ -23,7 +23,7 @@ This will rename the current `unreleased` subdirectory into `v0.1.0`
 #### Aggregate a CHangelog
 
 ```sh
-changers aggregate "v0.1.0" --type=markdown
+changers render 0.1.0 --type=markdown --for=user
 ```
 
 This will aggregate a changelog with `markdown` as the target format
