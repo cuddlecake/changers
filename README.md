@@ -18,7 +18,7 @@ changers release 0.1.0
 
 This will rename the current `unreleased` subdirectory into `v0.1.0`
 
-#### Aggregate a CHangelog
+#### Aggregate a Changelog
 
 ```sh
 changers render 0.1.0 --type=markdown --for=user
