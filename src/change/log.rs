@@ -5,8 +5,8 @@ use serde_yaml;
 pub struct Log {
     summary: String,
     log_type: String,
+    branch_name: Option<String>,
     author: Option<String>,
-    merge_request: Option<String>,
 }
 
 impl Log {
@@ -15,7 +15,7 @@ impl Log {
             log_type,
             summary,
             author: None,
-            merge_request: None,
+            branch_name: None,
         }
     }
 
@@ -23,13 +23,13 @@ impl Log {
         return serde_yaml::from_str(s);
     }
 
-    pub fn set_mr(&mut self, mr: String) -> &mut Log {
-        self.merge_request = Some(mr);
+    pub fn set_author(&mut self, author: String) -> &mut Log {
+        self.author = Some(author);
         self
     }
 
-    pub fn set_author(&mut self, author: String) -> &mut Log {
-        self.author = Some(author);
+    pub fn set_branch_name(&mut self, branch_name: String) -> &mut Log {
+        self.branch_name = Some(branch_name);
         self
     }
 

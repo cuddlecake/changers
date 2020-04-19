@@ -1,19 +1,26 @@
+use crate::change::{create, release, repo, Context};
 use cli::Command;
+use std::path::Path;
 
 mod change;
 mod cli;
-mod create;
 
 fn main() {
-    let default_project_root = ".".to_string();
     let opt = cli::start();
-    match opt.cmd {
-        Command::Create { log_type, summary } => create::handle(create::Args::new(
-            log_type.to_string(),
-            summary,
-            default_project_root,
-        )),
-        Command::Aggregate { release_name: _ } => println!("aggregate!"),
-        Command::Release { release_name: _ } => println!("release!"),
-    }
+    let base_path = Path::new(".");
+    match repo::open(base_path) {
+        Ok(repo) => {
+            let ctx = Context::new(repo).unwrap();
+            match opt.cmd {
+                Command::Create { log_type, summary } => {
+                    create::handle(create::Args::new(log_type.to_string(), summary), ctx)
+                }
+                Command::Release { release_name } => {
+                    release::handle(release::Args::new(release_name), ctx)
+                }
+                Command::Aggregate { release_name: _ } => println!("release!"),
+            }
+        }
+        Err(err) => println!("Failed Collecting Git Repository Information: {:?}", err),
+    };
 }

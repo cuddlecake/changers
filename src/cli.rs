@@ -1,4 +1,5 @@
 pub mod log_type;
+pub mod version;
 
 use log_type::LogType;
 use structopt::StructOpt;
@@ -35,6 +36,6 @@ pub enum Command {
     #[structopt(name = "release")]
     Release {
         /// Name of the Release and the resulting directory
-        release_name: String,
+        release_name: version::Version,
     },
 }
