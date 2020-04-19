@@ -4,7 +4,6 @@ use std::io::prelude::*;
 use std::path::Path;
 
 use crate::change::log::Log;
-use crate::change::repo;
 use crate::change::repo::Repo;
 use std::time::SystemTime;
 
@@ -14,13 +13,6 @@ pub enum Error {
     CouldNotCreateFile,
     CouldNotSerializeLog,
     CouldNotCreateDir,
-    RepoError(repo::Error),
-}
-
-impl From<repo::Error> for Error {
-    fn from(err: repo::Error) -> Error {
-        Error::RepoError(err)
-    }
 }
 
 #[derive(Debug)]
@@ -42,9 +34,9 @@ impl Args {
 
 pub fn handle(args: Args, repo: Repo) -> Result<(), Error> {
     let mut log: Log = Log::new(args.log_type, args.summary);
-    let unreleased_path = repo.find_repo_root().unwrap().join("changelogs/unreleased");
+    let unreleased_path = repo.find_repo_root().join("changelogs/unreleased");
     create_unrelease_directory(unreleased_path.as_path())?;
-    let current_branch_name = repo.current_branch_name()?;
+    let current_branch_name = repo.current_branch_name();
 
     log.set_author(repo.author_name())
         .set_branch_name(current_branch_name.to_string())
