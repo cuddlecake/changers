@@ -1,15 +1,15 @@
 use crate::change::repo;
 use crate::change::repo::Repo;
-use crate::cli::version::Version;
+use crate::cli::version::SemanticVersion;
 
 #[derive(Debug)]
 pub struct Args {
     audience: String,
-    version: Version,
+    version: SemanticVersion,
 }
 
 impl Args {
-    pub fn new(version: Version, audience: String) -> Args {
+    pub fn new(version: SemanticVersion, audience: String) -> Args {
         Args { version, audience }
     }
 }

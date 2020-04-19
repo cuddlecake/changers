@@ -3,7 +3,7 @@ pub mod version;
 
 use log_type::LogType;
 use structopt::StructOpt;
-use version::Version;
+use version::SemanticVersion;
 
 pub fn start() -> CLI {
     return CLI::from_args();
@@ -36,7 +36,7 @@ pub enum Command {
     #[structopt(name = "render")]
     Render {
         /// The release to render
-        release_name: Version,
+        release_name: SemanticVersion,
 
         /// Audience for which to render exclusively
         #[structopt(default_value = "user", long = "for", short = "f")]
@@ -45,6 +45,6 @@ pub enum Command {
     #[structopt(name = "release")]
     Release {
         /// Name of the Release and the resulting directory
-        release_name: Version,
+        release_name: SemanticVersion,
     },
 }

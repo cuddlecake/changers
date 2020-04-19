@@ -5,7 +5,7 @@ use std::fs::rename;
 
 #[derive(Debug)]
 pub struct Args {
-    version: version::Version,
+    version: version::SemanticVersion,
 }
 
 #[derive(Debug)]
@@ -21,7 +21,7 @@ impl From<repo::Error> for Error {
 }
 
 impl Args {
-    pub fn new(version: version::Version) -> Args {
+    pub fn new(version: version::SemanticVersion) -> Args {
         Args { version }
     }
 }

@@ -1,7 +1,7 @@
 use std::num::ParseIntError;
 
 #[derive(Debug, Eq, PartialEq)]
-pub struct Version {
+pub struct SemanticVersion {
     major: u32,
     minor: u32,
     bug: u32,
@@ -30,14 +30,14 @@ impl std::error::Error for VersionParseError {
     }
 }
 
-impl std::str::FromStr for Version {
+impl std::str::FromStr for SemanticVersion {
     type Err = VersionParseError;
-    fn from_str(str: &str) -> Result<Version, VersionParseError> {
+    fn from_str(str: &str) -> Result<SemanticVersion, VersionParseError> {
         let split: Vec<&str> = str.split(".").collect();
         let versions: Vec<Result<u32, ParseIntError>> =
             split.into_iter().map(|str| str.parse::<u32>()).collect();
         match *versions {
-            [Ok(major), Ok(minor), Ok(bug)] if bug > 0 => Ok(Version { major, minor, bug }),
+            [Ok(major), Ok(minor), Ok(bug)] if bug > 0 => Ok(SemanticVersion { major, minor, bug }),
             _ => Err(VersionParseError {
                 value: str.to_string(),
             }),
@@ -45,7 +45,7 @@ impl std::str::FromStr for Version {
     }
 }
 
-impl ToString for Version {
+impl ToString for SemanticVersion {
     fn to_string(&self) -> String {
         let v = vec![self.major, self.minor, self.bug]
             .into_iter()
@@ -64,38 +64,38 @@ mod tests {
     #[test]
     fn test_from_str() {
         assert_eq!(
-            Version {
+            SemanticVersion {
                 major: 1,
                 minor: 2,
                 bug: 3
             },
-            Version::from_str("1.2.3").unwrap()
+            SemanticVersion::from_str("1.2.3").unwrap()
         )
     }
 
     #[test]
     fn test_from_str_failure() {
         assert!(
-            Version::from_str("0.0.0").is_err(),
+            SemanticVersion::from_str("0.0.0").is_err(),
             "should have been an error, but is not"
         );
         assert!(
-            Version::from_str("0.-1.1").is_err(),
+            SemanticVersion::from_str("0.-1.1").is_err(),
             "should have been an error, but is not"
         );
         assert!(
-            Version::from_str("hello").is_err(),
+            SemanticVersion::from_str("hello").is_err(),
             "should have been an error, but is not"
         );
         assert!(
-            Version::from_str("1.2.x").is_err(),
+            SemanticVersion::from_str("1.2.x").is_err(),
             "should have been an error, but is not"
         );
     }
 
     #[test]
     fn test_to_string() {
-        let version = Version {
+        let version = SemanticVersion {
             major: 3,
             minor: 6,
             bug: 8,
