@@ -8,7 +8,7 @@
 changers create bugfix "Fixed some Error that caused issues" --for=user
 ```
 
-This will create a changelog artifact of type `bugfix` in the directory `./changelog/unreleased` as a single file.
+Create a changelog artifact of type `bugfix` in the directory `<git-root>/changelog/unreleased` as a single file.
 
 #### Release a Changelog
 
