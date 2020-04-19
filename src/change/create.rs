@@ -27,11 +27,16 @@ impl From<repo::Error> for Error {
 pub struct Args {
     log_type: String,
     summary: String,
+    audience: String,
 }
 
 impl Args {
-    pub fn new(log_type: String, summary: String) -> Args {
-        Args { log_type, summary }
+    pub fn new(log_type: String, summary: String, audience: String) -> Args {
+        Args {
+            log_type,
+            summary,
+            audience,
+        }
     }
 }
 
@@ -41,8 +46,9 @@ pub fn handle(args: Args, repo: Repo) -> Result<(), Error> {
     create_unrelease_directory(unreleased_path.as_path())?;
     let current_branch_name = repo.current_branch_name()?;
 
-    log.set_author(repo.author_name());
-    log.set_branch_name(current_branch_name.to_string());
+    log.set_author(repo.author_name())
+        .set_branch_name(current_branch_name.to_string())
+        .set_audience(args.audience);
 
     let log_item_yaml = log.to_yaml_str().map_err(|_| Error::CouldNotSerializeLog)?;
     let file_name = format!(

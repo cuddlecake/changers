@@ -3,6 +3,7 @@ pub mod version;
 
 use log_type::LogType;
 use structopt::StructOpt;
+use version::Version;
 
 pub fn start() -> CLI {
     return CLI::from_args();
@@ -27,6 +28,9 @@ pub enum Command {
         log_type: LogType,
         /// The summary of the logged change
         summary: String,
+        /// The target audience for this change
+        #[structopt(default_value = "user", long = "for", short = "f")]
+        audience: String,
     },
     #[structopt(name = "aggregate")]
     Aggregate {
@@ -36,6 +40,6 @@ pub enum Command {
     #[structopt(name = "release")]
     Release {
         /// Name of the Release and the resulting directory
-        release_name: version::Version,
+        release_name: Version,
     },
 }

@@ -7,6 +7,7 @@ pub struct Log {
     log_type: String,
     branch_name: Option<String>,
     author: Option<String>,
+    audience: String,
 }
 
 impl Log {
@@ -16,6 +17,7 @@ impl Log {
             summary,
             author: None,
             branch_name: None,
+            audience: "".to_string(),
         }
     }
 
@@ -32,6 +34,11 @@ impl Log {
 
     pub fn set_branch_name(&mut self, branch_name: String) -> &mut Log {
         self.branch_name = Some(branch_name);
+        self
+    }
+
+    pub fn set_audience(&mut self, audience: String) -> &mut Log {
+        self.audience = audience;
         self
     }
 
