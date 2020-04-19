@@ -1,4 +1,4 @@
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub enum LogType {
     Bugfix,
     Feature,
@@ -46,12 +46,34 @@ impl std::str::FromStr for LogType {
 
 impl ToString for LogType {
     fn to_string(&self) -> String {
-        return match self {
-            LogType::Technical => "Technical",
-            LogType::Feature => "Feature",
-            LogType::Misc => "Misc",
-            LogType::Bugfix => "Bugfix",
-        }
-        .to_string();
+        return format!("{:?}", self).to_lowercase();
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::cli::log_type::LogType;
+    use git2::StashApplyProgress::LoadingStash;
+    use std::str::FromStr;
+
+    #[test]
+    fn test_to_string() {
+        assert_eq!(LogType::Technical.to_string(), "technical");
+        assert_eq!(LogType::Feature.to_string(), "feature");
+        assert_eq!(LogType::Misc.to_string(), "misc");
+        assert_eq!(LogType::Bugfix.to_string(), "bugfix");
+    }
+
+    #[test]
+    fn test_from_string() {
+        assert_eq!(LogType::from_str("technical").unwrap(), LogType::Technical);
+        assert_eq!(LogType::from_str("feature").unwrap(), LogType::Feature);
+        assert_eq!(LogType::from_str("bugfix").unwrap(), LogType::Bugfix);
+        assert_eq!(LogType::from_str("misc").unwrap(), LogType::Misc);
+    }
+
+    #[test]
+    fn test_from_string_failure() {
+        assert!(LogType::from_str("thisisillegal").is_err())
     }
 }
