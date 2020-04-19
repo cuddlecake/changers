@@ -1,5 +1,8 @@
 use git2::Repository;
-use std::path::Path;
+use std::path::{Path, PathBuf};
+
+const CHANGELOGS: &str = "changelogs";
+const UNRELEASED: &str = "unreleased";
 
 pub struct Repo {
     git_repository: Repository,
@@ -14,10 +17,18 @@ pub fn open(path: &Path) -> Repo {
 }
 
 impl Repo {
-    pub fn find_repo_root(&self) -> &Path {
+    fn workdir(&self) -> &Path {
         self.git_repository
             .workdir()
             .expect("CLI expects a git workdir to exist, but none was found")
+    }
+
+    pub fn changelogs_dir(&self) -> PathBuf {
+        self.workdir().join(CHANGELOGS)
+    }
+
+    pub fn unreleased_dir(&self) -> PathBuf {
+        self.changelogs_dir().join(UNRELEASED)
     }
 
     pub fn current_branch_name(&self) -> String {

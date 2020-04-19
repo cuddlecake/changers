@@ -34,7 +34,7 @@ impl Args {
 
 pub fn handle(args: Args, repo: Repo) -> Result<(), Error> {
     let mut log: Log = Log::new(args.log_type, args.summary);
-    let unreleased_path = repo.find_repo_root().join("changelogs/unreleased");
+    let unreleased_path = repo.unreleased_dir();
     create_unrelease_directory(unreleased_path.as_path())?;
     let current_branch_name = repo.current_branch_name();
 

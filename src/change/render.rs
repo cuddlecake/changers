@@ -17,10 +17,7 @@ impl Args {
 pub enum Error {}
 
 pub fn handle(args: Args, repo: Repo) -> Result<(), Error> {
-    let path = repo
-        .find_repo_root()
-        .join("changelog")
-        .join(args.version.to_string());
+    let path = repo.changelogs_dir().join(args.version.to_string());
 
     println!("{:?}", path);
     println!("{:?}", args);
