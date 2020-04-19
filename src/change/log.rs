@@ -19,9 +19,11 @@ impl Log {
         }
     }
 
+    /*
     pub fn from_yaml_str(s: &str) -> Result<Log, serde_yaml::Error> {
         return serde_yaml::from_str(s);
     }
+    */
 
     pub fn set_author(&mut self, author: String) -> &mut Log {
         self.author = Some(author);
